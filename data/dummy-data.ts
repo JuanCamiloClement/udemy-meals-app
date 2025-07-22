@@ -1,5 +1,5 @@
-import type { Category } from '../models/category';
-import type { Meal } from '../models/meal';
+import type { Category } from '../types/category';
+import type { Meal } from '../types/meal';
 
 export const CATEGORIES: Category[] = [
   {

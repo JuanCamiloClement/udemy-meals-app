@@ -3,12 +3,12 @@ import { FlatList } from "react-native";
 
 import { CATEGORIES } from "../data/dummy-data";
 import { CategoryGridTile } from "../components/CategoryGridTile";
-import type { Category } from "../models/category";
+import type { Category } from "../types/category";
 
 export const CategoriesScreen = () => {
   const renderCategoryItem = useCallback(({ item }: { item: Category }) => {
     return (
-      <CategoryGridTile title={item.title} color={item.color} />
+      <CategoryGridTile title={item.title} color={item.color} categoryId={item.id} />
     );
   }, [])
 

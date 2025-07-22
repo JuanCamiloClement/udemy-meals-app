@@ -1,0 +1,47 @@
+import { useCallback, useMemo } from "react";
+import { View, FlatList, StyleSheet } from "react-native";
+
+import { MealItem } from "../components/MealItem";
+import { MEALS } from "../data/dummy-data";
+import { MealsOverviewScreenProps } from "../types/props";
+import type { Meal } from "../types/meal";
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+  },
+});
+
+export const MealsOverviewScreen = ({ route }: MealsOverviewScreenProps) => {
+  const { categoryId } = route.params;
+
+  const meals = useMemo(() => {
+    return MEALS.filter(({ categoryIds }) => categoryIds.includes(categoryId));
+  }, []);
+
+  const renderMealItem = useCallback(({ item }: { item: Meal }) => {
+    return (
+      <MealItem
+        title={item.title}
+        imageUrl={item.imageUrl}
+        duration={item.duration}
+        complexity={item.complexity}
+        affordability={item.affordability}
+      />
+    );
+  }, []);
+
+  const keyExtractor = useCallback((item: Meal) => item.id, []);
+
+  return (
+    <View style={styles.container}>
+      <FlatList
+        data={meals}
+        renderItem={renderMealItem}
+        keyExtractor={keyExtractor}
+        showsVerticalScrollIndicator={false}
+      />
+    </View>
+  );
+};

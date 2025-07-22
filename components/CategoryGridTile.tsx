@@ -1,6 +1,10 @@
 import { Pressable, Text, View, StyleSheet, Platform } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+
+import { UseNavigationProp } from "../types/props";
 
 type CategoryGridTileProps = {
+  categoryId: string;
   title: string;
   color: string;
 }
@@ -41,11 +45,14 @@ const styles = StyleSheet.create({
   },
 });
 
-export const CategoryGridTile = ({ title, color }: CategoryGridTileProps) => {
+export const CategoryGridTile = ({ title, color, categoryId }: CategoryGridTileProps) => {
+  const navigation = useNavigation<UseNavigationProp>();
+
   return (
     <View style={styles.gridItem}>
       <Pressable
         style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]}
+        onPress={() => navigation.navigate('MealsOverview', { categoryId })}
       >
         <View style={[styles.innerContainer, { backgroundColor: color }]}>
           <Text style={styles.title}>{title}</Text>

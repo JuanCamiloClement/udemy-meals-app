@@ -4,8 +4,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { CategoriesScreen } from './screens/CategoriesScreen';
+import { MealsOverviewScreen } from './screens/MealsOverviewScreen';
+import type { StackParamList } from './types/props';
 
-const StackNavigator = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<StackParamList>();
 
 const styles = StyleSheet.create({});
 
@@ -14,9 +16,10 @@ export default function App() {
     <>
       <StatusBar style='dark' />
       <NavigationContainer>
-        <StackNavigator.Navigator>
-          <StackNavigator.Screen name='Categories' component={CategoriesScreen} />
-        </StackNavigator.Navigator>
+        <Stack.Navigator>
+          <Stack.Screen name='Categories' component={CategoriesScreen} />
+          <Stack.Screen name='MealsOverview' component={MealsOverviewScreen} />
+        </Stack.Navigator>
       </NavigationContainer>
     </>
   );
