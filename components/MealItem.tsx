@@ -6,10 +6,13 @@ import {
   Platform,
   StyleSheet
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import type { Meal } from "../types/meal";
+import type { UseNavigationProp } from "../types/props";
+import { useCallback } from "react";
 
-type MealItemProps = Pick<Meal, 'title' | 'imageUrl' | 'duration' | 'complexity' | 'affordability'>
+type MealItemProps = Pick<Meal, 'id' | 'title' | 'imageUrl' | 'duration' | 'complexity' | 'affordability'>
 
 const styles = StyleSheet.create({
   mealItem: {
@@ -54,11 +57,17 @@ const styles = StyleSheet.create({
   },
 });
 
-export const MealItem = ({ title, imageUrl, duration, complexity, affordability }: MealItemProps) => {
+export const MealItem = ({ id, title, imageUrl, duration, complexity, affordability }: MealItemProps) => {
+  const navigation = useNavigation<UseNavigationProp>();
+  const navigateToMealDetails = useCallback(() => {
+    navigation.navigate('MealDetails', { mealId: id })
+  }, [navigation]);
+
   return (
     <View style={styles.mealItem}>
       <Pressable
         style={({ pressed }) => pressed && styles.buttonPressed}
+        onPress={navigateToMealDetails}
       >
         <View style={styles.innerContainer}>
           <View>

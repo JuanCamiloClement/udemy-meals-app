@@ -29,6 +29,7 @@ export const MealsOverviewScreen = ({ route, navigation }: MealsOverviewScreenPr
   const renderMealItem = useCallback(({ item }: { item: Meal }) => {
     return (
       <MealItem
+        id={item.id}
         title={item.title}
         imageUrl={item.imageUrl}
         duration={item.duration}
