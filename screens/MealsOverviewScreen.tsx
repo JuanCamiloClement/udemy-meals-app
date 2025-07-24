@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import { useCallback, useLayoutEffect, useMemo } from "react";
 import { View, FlatList, StyleSheet } from "react-native";
 
 import { MealItem } from "../components/MealItem";
@@ -13,12 +13,18 @@ const styles = StyleSheet.create({
   },
 });
 
-export const MealsOverviewScreen = ({ route }: MealsOverviewScreenProps) => {
-  const { categoryId } = route.params;
+export const MealsOverviewScreen = ({ route, navigation }: MealsOverviewScreenProps) => {
+  const { categoryId, title } = route.params;
 
   const meals = useMemo(() => {
     return MEALS.filter(({ categoryIds }) => categoryIds.includes(categoryId));
-  }, []);
+  }, [categoryId]);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title,
+    })
+  }, [navigation]);
 
   const renderMealItem = useCallback(({ item }: { item: Meal }) => {
     return (

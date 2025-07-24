@@ -52,7 +52,7 @@ export const CategoryGridTile = ({ title, color, categoryId }: CategoryGridTileP
     <View style={styles.gridItem}>
       <Pressable
         style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]}
-        onPress={() => navigation.navigate('MealsOverview', { categoryId })}
+        onPress={() => navigation.navigate('MealsOverview', { categoryId, title })}
       >
         <View style={[styles.innerContainer, { backgroundColor: color }]}>
           <Text style={styles.title}>{title}</Text>
