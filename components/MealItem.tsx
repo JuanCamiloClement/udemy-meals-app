@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import {
   View,
   Text,
@@ -8,9 +9,9 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
+import { MealDetails } from "./MealDetails";
 import type { Meal } from "../types/meal";
 import type { UseNavigationProp } from "../types/props";
-import { useCallback } from "react";
 
 type MealItemProps = Pick<Meal, 'id' | 'title' | 'imageUrl' | 'duration' | 'complexity' | 'affordability'>
 
@@ -46,15 +47,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 18,
   },
-  details: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    padding: 8,
-  },
-  detailItem: {
-    fontSize: 12,
-  },
 });
 
 export const MealItem = ({ id, title, imageUrl, duration, complexity, affordability }: MealItemProps) => {
@@ -74,11 +66,7 @@ export const MealItem = ({ id, title, imageUrl, duration, complexity, affordabil
             <Image source={{ uri: imageUrl }} style={styles.image} />
             <Text style={styles.title}>{title}</Text>
           </View>
-          <View style={styles.details}>
-            <Text style={styles.detailItem}>{duration.toString()}m</Text>
-            <Text style={styles.detailItem}>{complexity.toUpperCase()}</Text>
-            <Text style={styles.detailItem}>{affordability.toUpperCase()}</Text>
-          </View>
+          <MealDetails duration={duration} complexity={complexity} affordability={affordability} />
         </View>
       </Pressable>
     </View>
