@@ -1,12 +1,13 @@
-import { useMemo } from "react";
-import { Text, View, Image, StyleSheet, ScrollView } from "react-native";
+import { useMemo, useLayoutEffect } from 'react';
+import { Text, View, Image, StyleSheet, ScrollView, Button } from 'react-native';
 
-import { MealDetails } from "../components/MealDetails";
-import { Subtitle } from "../components/MealDetails/Subtitle";
-import { List } from "../components/MealDetails/List";
-import { MEALS } from "../data/dummy-data";
-import type { MealDetailsScreenProps } from "../types/props";
-import type { Meal } from "../types/meal";
+import { MealDetails } from '../components/MealDetails';
+import { Subtitle } from '../components/MealDetails/Subtitle';
+import { List } from '../components/MealDetails/List';
+import { MEALS } from '../data/dummy-data';
+import type { MealDetailsScreenProps } from '../types/props';
+import type { Meal } from '../types/meal';
+import { IconButton } from '../components/IconButton';
 
 const styles = StyleSheet.create({
   image: {
@@ -30,10 +31,16 @@ const styles = StyleSheet.create({
   },
 });
 
-export const MealDetailsScreen = ({ route }: MealDetailsScreenProps) => {
+export const MealDetailsScreen = ({ route, navigation }: MealDetailsScreenProps) => {
   const { mealId } = route.params;
 
   const mealData = useMemo(() => MEALS.find((meal) => meal.id === mealId), [mealId]) as Meal;
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => <IconButton icon="star" color="white" onPress={() => {}} />,
+    });
+  }, [navigation]);
 
   return (
     <ScrollView>

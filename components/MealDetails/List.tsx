@@ -1,8 +1,8 @@
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet } from 'react-native';
 
 type ListProps = {
   data: string[];
-}
+};
 
 const styles = StyleSheet.create({
   listItem: {

@@ -1,19 +1,12 @@
-import { useCallback } from "react";
-import {
-  View,
-  Text,
-  Pressable,
-  Image,
-  Platform,
-  StyleSheet
-} from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useCallback } from 'react';
+import { View, Text, Pressable, Image, Platform, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-import { MealDetails } from "./MealDetails";
-import type { Meal } from "../types/meal";
-import type { UseNavigationProp } from "../types/props";
+import { MealDetails } from './MealDetails';
+import type { Meal } from '../types/meal';
+import type { UseNavigationProp } from '../types/props';
 
-type MealItemProps = Pick<Meal, 'id' | 'title' | 'imageUrl' | 'duration' | 'complexity' | 'affordability'>
+type MealItemProps = Pick<Meal, 'id' | 'title' | 'imageUrl' | 'duration' | 'complexity' | 'affordability'>;
 
 const styles = StyleSheet.create({
   mealItem: {
@@ -52,15 +45,12 @@ const styles = StyleSheet.create({
 export const MealItem = ({ id, title, imageUrl, duration, complexity, affordability }: MealItemProps) => {
   const navigation = useNavigation<UseNavigationProp>();
   const navigateToMealDetails = useCallback(() => {
-    navigation.navigate('MealDetails', { mealId: id })
+    navigation.navigate('MealDetails', { mealId: id });
   }, [navigation]);
 
   return (
     <View style={styles.mealItem}>
-      <Pressable
-        style={({ pressed }) => pressed && styles.buttonPressed}
-        onPress={navigateToMealDetails}
-      >
+      <Pressable style={({ pressed }) => pressed && styles.buttonPressed} onPress={navigateToMealDetails}>
         <View style={styles.innerContainer}>
           <View>
             <Image source={{ uri: imageUrl }} style={styles.image} />
@@ -71,4 +61,4 @@ export const MealItem = ({ id, title, imageUrl, duration, complexity, affordabil
       </Pressable>
     </View>
   );
-}
+};

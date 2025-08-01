@@ -1,6 +1,6 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from 'react-native';
 
-import type { Meal } from "../types/meal";
+import type { Meal } from '../types/meal';
 
 interface MealDetailsProps extends Pick<Meal, 'duration' | 'complexity' | 'affordability'> {
   style?: Record<string, string | number>;

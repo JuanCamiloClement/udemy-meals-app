@@ -15,7 +15,7 @@ const styles = StyleSheet.create({});
 export default function App() {
   return (
     <>
-      <StatusBar style='light' />
+      <StatusBar style="light" />
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{
@@ -25,24 +25,24 @@ export default function App() {
           }}
         >
           <Stack.Screen
-            name='MealsCategories'
+            name="MealsCategories"
             component={CategoriesScreen}
             options={{
               title: 'All Categories',
             }}
           />
           <Stack.Screen
-            name='MealsOverview'
+            name="MealsOverview"
             component={MealsOverviewScreen}
-          // Possible approach as opposed to navigation.setOptions used in MealsOverviewScreen
-          // options={({ route }) => {
-          //   const { title } = route.params;
-          //   return {
-          //     title,
-          //   }
-          // }}
+            // Possible approach as opposed to navigation.setOptions used in MealsOverviewScreen
+            // options={({ route }) => {
+            //   const { title } = route.params;
+            //   return {
+            //     title,
+            //   }
+            // }}
           />
-          <Stack.Screen name='MealDetails' component={MealDetailsScreen} />
+          <Stack.Screen name="MealDetails" component={MealDetailsScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

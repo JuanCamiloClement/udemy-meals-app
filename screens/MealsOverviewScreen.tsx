@@ -13,7 +13,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export const MealsOverviewScreen = ({ route, navigation }: MealsOverviewScreenProps) => {
+export const MealsOverviewScreen = ({
+  route,
+  navigation,
+}: MealsOverviewScreenProps) => {
   const { categoryId, title } = route.params;
 
   const meals = useMemo(() => {
@@ -23,7 +26,7 @@ export const MealsOverviewScreen = ({ route, navigation }: MealsOverviewScreenPr
   useLayoutEffect(() => {
     navigation.setOptions({
       title,
-    })
+    });
   }, [navigation]);
 
   const renderMealItem = useCallback(({ item }: { item: Meal }) => {

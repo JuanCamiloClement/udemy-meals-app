@@ -1,8 +1,8 @@
-import { Text, StyleSheet } from "react-native";
+import { Text, StyleSheet } from 'react-native';
 
 type SubtitleProps = {
   children: string;
-}
+};
 
 const styles = StyleSheet.create({
   subtitle: {
@@ -19,7 +19,5 @@ const styles = StyleSheet.create({
 });
 
 export const Subtitle = ({ children }: SubtitleProps) => {
-  return (
-    <Text style={styles.subtitle}>{children}</Text>
-  );
+  return <Text style={styles.subtitle}>{children}</Text>;
 };

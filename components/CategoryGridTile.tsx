@@ -1,13 +1,13 @@
-import { Pressable, Text, View, StyleSheet, Platform } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { Pressable, Text, View, StyleSheet, Platform } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-import { UseNavigationProp } from "../types/props";
+import { UseNavigationProp } from '../types/props';
 
 type CategoryGridTileProps = {
   categoryId: string;
   title: string;
   color: string;
-}
+};
 
 const styles = StyleSheet.create({
   gridItem: {
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
       height: 2,
     },
     shadowRadius: 8,
-    overflow: Platform.select({ android: 'hidden', ios: 'visible' })
+    overflow: Platform.select({ android: 'hidden', ios: 'visible' }),
   },
   button: {
     flex: 1,
