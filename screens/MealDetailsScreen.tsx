@@ -1,5 +1,5 @@
-import { useMemo, useLayoutEffect } from 'react';
-import { Text, View, Image, StyleSheet, ScrollView, Button } from 'react-native';
+import { useMemo, useLayoutEffect, useCallback } from 'react';
+import { Text, View, Image, StyleSheet, ScrollView } from 'react-native';
 
 import { MealDetails } from '../components/MealDetails';
 import { Subtitle } from '../components/MealDetails/Subtitle';
@@ -8,6 +8,7 @@ import { MEALS } from '../data/dummy-data';
 import type { MealDetailsScreenProps } from '../types/props';
 import type { Meal } from '../types/meal';
 import { IconButton } from '../components/IconButton';
+import { useFavorites } from '../hooks/useFavorites';
 
 const styles = StyleSheet.create({
   image: {
@@ -34,13 +35,28 @@ const styles = StyleSheet.create({
 export const MealDetailsScreen = ({ route, navigation }: MealDetailsScreenProps) => {
   const { mealId } = route.params;
 
+  const { ids: favoriteIds, addFavorite, removeFavorite } = useFavorites();
+
+  const isFavorite = useMemo(() => favoriteIds.includes(mealId), [favoriteIds, mealId]);
+
   const mealData = useMemo(() => MEALS.find((meal) => meal.id === mealId), [mealId]) as Meal;
+
+  const handleToggleFavorite = () => {
+    if (isFavorite) {
+      removeFavorite(mealId);
+      return;
+    }
+
+    addFavorite(mealId);
+  };
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => <IconButton icon="star" color="white" onPress={() => {}} />,
+      headerRight: () => (
+        <IconButton icon={isFavorite ? 'star' : 'star-outline'} color="white" onPress={handleToggleFavorite} />
+      ),
     });
-  }, [navigation]);
+  }, [navigation, isFavorite]);
 
   return (
     <ScrollView>

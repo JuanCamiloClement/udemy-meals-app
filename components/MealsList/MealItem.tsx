@@ -2,9 +2,9 @@ import { useCallback } from 'react';
 import { View, Text, Pressable, Image, Platform, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import { MealDetails } from './MealDetails';
-import type { Meal } from '../types/meal';
-import type { UseNavigationProp } from '../types/props';
+import { MealDetails } from '../MealDetails';
+import type { Meal } from '../../types/meal';
+import type { UseNavigationProp } from '../../types/props';
 
 type MealItemProps = Pick<Meal, 'id' | 'title' | 'imageUrl' | 'duration' | 'complexity' | 'affordability'>;
 

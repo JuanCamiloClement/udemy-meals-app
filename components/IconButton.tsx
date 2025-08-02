@@ -16,7 +16,11 @@ const styles = StyleSheet.create({
 
 export const IconButton = ({ icon, color, onPress }: IconButtonProps) => {
   return (
-    <Pressable onPress={onPress} style={({ pressed }) => pressed && styles.pressed}>
+    <Pressable
+      onPress={onPress}
+      style={({ pressed }) => pressed && styles.pressed}
+      hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+    >
       <Ionicons name={icon} size={24} color={color} />
     </Pressable>
   );
