@@ -1,9 +1,11 @@
 import { useMemo } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { useSelector } from 'react-redux';
 
 import { MealsList } from '../components/MealsList/MealsList';
-import { useFavorites } from '../hooks/useFavorites';
+// import { useFavorites } from '../hooks/useFavorites';
 import { MEALS } from '../data/dummy-data';
+import type { RootState } from '../store/redux/store';
 
 const styles = StyleSheet.create({
   rootContainer: {
@@ -19,7 +21,8 @@ const styles = StyleSheet.create({
 });
 
 export const FavoritesScreen = () => {
-  const { ids: favoriteIds } = useFavorites();
+  // const { ids: favoriteIds } = useFavorites();
+  const { ids: favoriteIds } = useSelector((state: RootState) => state.favoriteMeals);
 
   const meals = useMemo(() => {
     return MEALS.filter(({ id }) => favoriteIds.includes(id));

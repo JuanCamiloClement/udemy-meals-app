@@ -1,5 +1,6 @@
-import { useMemo, useLayoutEffect, useCallback } from 'react';
+import { useMemo, useLayoutEffect } from 'react';
 import { Text, View, Image, StyleSheet, ScrollView } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { MealDetails } from '../components/MealDetails';
 import { Subtitle } from '../components/MealDetails/Subtitle';
@@ -8,7 +9,9 @@ import { MEALS } from '../data/dummy-data';
 import type { MealDetailsScreenProps } from '../types/props';
 import type { Meal } from '../types/meal';
 import { IconButton } from '../components/IconButton';
-import { useFavorites } from '../hooks/useFavorites';
+// import { useFavorites } from '../hooks/useFavorites';
+import type { RootState } from '../store/redux/store';
+import { addFavorite, removeFavorite } from '../store/redux/favoritesSlice';
 
 const styles = StyleSheet.create({
   image: {
@@ -35,7 +38,9 @@ const styles = StyleSheet.create({
 export const MealDetailsScreen = ({ route, navigation }: MealDetailsScreenProps) => {
   const { mealId } = route.params;
 
-  const { ids: favoriteIds, addFavorite, removeFavorite } = useFavorites();
+  // const { ids: favoriteIds, addFavorite, removeFavorite } = useFavorites();
+  const { ids: favoriteIds } = useSelector((state: RootState) => state.favoriteMeals);
+  const dispatch = useDispatch();
 
   const isFavorite = useMemo(() => favoriteIds.includes(mealId), [favoriteIds, mealId]);
 
@@ -43,11 +48,13 @@ export const MealDetailsScreen = ({ route, navigation }: MealDetailsScreenProps)
 
   const handleToggleFavorite = () => {
     if (isFavorite) {
-      removeFavorite(mealId);
+      // removeFavorite(mealId);
+      dispatch(removeFavorite({ id: mealId }));
       return;
     }
 
-    addFavorite(mealId);
+    // addFavorite(mealId);
+    dispatch(addFavorite({ id: mealId }));
   };
 
   useLayoutEffect(() => {
